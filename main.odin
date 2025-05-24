@@ -26,14 +26,22 @@ player1 : Paddle
 player2 : Paddle
 ball : Ball
 
+// Sound
+boop_sound: rl.Sound;
+bang_sound: rl.Sound;
+
 main :: proc(){
 	// Setup window
 	window_dim := m.int2{800, 600}
 	rl.InitWindow(window_dim.x, window_dim.y, "Pong")
+	rl.InitAudioDevice()
 	rl.SetTargetFPS(60)
 	is_running := true
 
 
+	// Set sound
+	boop_sound = rl.LoadSound("Assets/boop.wav")
+	bang_sound = rl.LoadSound("Assets/bang.wav")
 
 	init_match(&ball, &player1, &player2, window_dim)
 
@@ -54,15 +62,19 @@ main :: proc(){
 		if ball.p.x < 0{
 			ball.p.x = 0
 			ball.v.x = -ball.v.x
+			rl.PlaySound(bang_sound)
 		}else if ball.p.x > f32(window_dim.x){
 			ball.p.x = f32(window_dim.x)
 			ball.v.x = -ball.v.x
+			rl.PlaySound(bang_sound)
 		}else if ball.p.y < 0{
 			ball.p.y = 0
 			ball.v.y = -ball.v.y
+			rl.PlaySound(bang_sound)
 		}else if ball.p.y > f32(window_dim.y){
 			ball.p.y = f32(window_dim.y)
 			ball.v.y = -ball.v.y
+			rl.PlaySound(bang_sound)
 		}
 
 		// Paddle movement
@@ -154,6 +166,7 @@ paddle_ball_collision_detection :: proc(ball :^Ball, paddle :Paddle){
 	ball.p.y > paddle.p.y - f32(paddle.dim.y){
 		ball.v.x = -ball.v.x
 		fmt.println("Collision with paddle.")
+		rl.PlaySound(boop_sound)
 	}
 }
 
