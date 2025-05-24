@@ -4,7 +4,7 @@ I wrote pong in Odin. The main reason I did this is that I have always been intr
 
 Using RayLib, I was able to get pong up and running. Throughout this project, I've realized the strength of Odin being interoperable with C. I have access to so many incredble libraries that have been implemented with C, while also have the power and convenience of programming in Odin.
 
-[Software Demo Video](http://youtube.link.goes.here)
+[Software Demo Video](https://youtu.be/jS05lZyDkWc)
 
 # Development Environment
 
